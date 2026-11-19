@@ -3,6 +3,13 @@
 
 cmake_minimum_required(VERSION 3.21)
 
+# ESP-IDF (component manager git dependency with `path: c`): c/ is one component
+# (platforms/esp32/component.cmake); the host project below is not built.
+if(ESP_PLATFORM)
+    include(${CMAKE_CURRENT_LIST_DIR}/platforms/esp32/component.cmake)
+    return()
+endif()
+
 # The version comes from az_iot_version.h, the single source of truth (non-CMake
 # builds such as ESP-IDF compile it directly). project() takes only the numeric
 # part; AZ_IOT_VERSION_FULL carries the pre-release label too.
