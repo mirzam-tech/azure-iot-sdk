@@ -1,0 +1,12 @@
+## ESP-IDF Component Manager manifest for c/ (Mira fork; consumed as a git dependency with
+## path: c, see platforms/esp32/component.cmake). Only the file filter is set.
+description: Azure IoT device SDK for C (azure-iot-sdk c/) as one ESP-IDF component
+url: https://github.com/mirzam-tech/azure-iot-sdk
+files:
+  exclude:
+    # A git submodule (deps/azure-sdk-for-c) has a `.git` FILE, not a directory, so the
+    # manager's default `**/.git/**/*` does not drop it. Its content is a relative path into
+    # the manager's cache (`gitdir: ../../../../../root/.cache/Espressif/ComponentManager/...`),
+    # which differs with $HOME and the temp dir: the component hash in the consumer's
+    # dependencies.lock would then only match on machines with the same cache path.
+    - "**/.git"
